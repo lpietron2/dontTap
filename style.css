@@ -1,10 +1,14 @@
 body{
-    background-image: linear-gradient(to right, white, black);
+    background-image: linear-gradient(to right, rgb(226, 255, 199), rgb(255, 162, 213));
     font-size: 20px;
-    /* -webkit-user-select: none;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none; */
+    user-select: none;
+
+    /* -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none; */
 }
 *{
     box-sizing: border-box;
@@ -42,6 +46,8 @@ h1{
 #play-field{
     width: 35vw;
     height: 35vw;
+    min-width: 400px;
+    min-height: 400px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 1rem;
@@ -56,6 +62,15 @@ h1{
 .tile:hover{
     cursor: pointer;
 }
-.tile:active{
-    cursor: crosshair;
+#str-button{
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    min-width: 100px;
+}
+
+#leaderBoard-left{
+    display: flex;
+}
+#leaderBoard-right{
+    display: flex;
 }

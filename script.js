@@ -1,8 +1,16 @@
-//var tiles = Array.from(document.getElementsByClassName("tile"));
-
-var playField = document.getElementById("play-field");
+const playField = document.getElementById("play-field");
+const strButton = document.getElementById("str-button");
+const timeField = document.getElementById("time");
+const textField = document.getElementById("text");
+const leaderBoard = document.getElementById("leaderBoard-left");
 var points = 0;
 var activeGame = false;
+var theFinalCountdown = 3;
+
+var timeCounter = 30_000;
+var seconds = 0;
+var t1 = 0;
+var t2 = 0;
 
 var p1, p2, p3;
 var p1_old, p2_old, p3_old;
@@ -34,7 +42,6 @@ function randomNumber(number){
     }while(number === p1 || number === p2 || number === p3);
     return number;
 }
-
 function drawOneTile(nrTile){
     switch(nrTile){
         case p1:{
@@ -85,35 +92,71 @@ function drawTiles() {
     tiles[p3].style.backgroundColor = "black";
 
 }
-
 function startGame() {
     if(activeGame == false){
+        restart();
+
+        //t1 = new Date().getTime();
+        //countDown();
+
         activeGame = true;
         drawTiles();
+        strButton.innerHTML = "Restart";
+    }else{
+        activeGame == false;
+        restart();
+        strButton.innerHTML = "Start";
     }
 }
-
-playField.addEventListener('click', start = (clickedTile) => {
+function restart(){
+    activeGame = false;
+    for(let i=0; i<16; i++){
+        tiles[i].style.backgroundColor = "white";
+    }
+    points = 0;
+    timeCounter = 30_000;
+    document.getElementById("points").innerHTML = points;
+}
+function timer(){
+    window.setInterval(function() {
+        if(activeGame){
+            seconds = timeCounter/1000;
+            mili = timeCounter/100;
+            timeField.innerHTML = seconds;
+            timeCounter = timeCounter - 10;
+            if(timeCounter < 0){
+                activeGame = false;
+            }
+        }
+    }, 10);
+    
+}
+function countDown(){
+    textField.innerHTML = "uuuuuuuuu";
+    do{
+        t2 = new Date().getTime();
+    }while(t2-t1 < 3000);
+    console.log("count down");
+}
+playField.addEventListener('mousedown', start = (clickedTile) => {
     if(activeGame){
         clickedTile = clickedTile.target;
         const nrTile = parseInt(clickedTile.getAttribute("data-tile"))
         if(nrTile === p1 || nrTile === p2 || nrTile === p3){
-            //clickedTile.style.backgroundColor = "white";
             drawOneTile(nrTile);
         }else{
             clickedTile.style.backgroundColor = "red";
+            activeGame = false;
+            strButton.innerHTML = "Restart";
         }
     }
 });
-playField.addEventListener('dragover', start = (clickedTile) => {
-    if(activeGame){
-        clickedTile = clickedTile.target;
-        const nrTile = parseInt(clickedTile.getAttribute("data-tile"))
-        if(nrTile === p1 || nrTile === p2 || nrTile === p3){
-            //clickedTile.style.backgroundColor = "white";
-            drawOneTile(nrTile);
-        }else{
-            //clickedTile.style.backgroundColor = "red";
-        }
-    }
-});
+
+function loadDoc() {
+    
+}
+
+window.onload = function time(){
+    timer();
+    loadDoc();
+}

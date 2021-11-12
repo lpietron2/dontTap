@@ -9,9 +9,10 @@
 </head>
 <body>        
     <h1>A Don't Tap wanna be</h1>
+    <div id="leaderBoard-left"></div>
     <div id="container">
-        <div id="time">00:00</div>
-        <div id="text">Click anywhere to start!</div>
+        <div id="time">30:0</div>
+        <div id="text">Hello there!</div>
         <div id="points">00000</div>
         <div id="play-field">
             <div id="tile0" class="tile" data-tile="0"></div>
@@ -34,7 +35,8 @@
             <div id="tile14" class="tile" data-tile="14"></div>
             <div id="tile15" class="tile" data-tile="15"></div>
         </div>
-        <button onclick="startGame()">Start</button>
+        <button id="str-button" onclick="startGame()">Start</button>
+        <div id="leaderBoard-right"></div>
     </div>
     <script src="script.js"></script>
 </body>
